@@ -31,4 +31,6 @@ export declare class StarRating implements ControlValueAccessor, OnInit {
     iconsArray: number[];
     constructor(events: Events);
     changeRating(event: any): void;
+    getColor(index: any): string;
+    getIconName(index: any): string;
 }

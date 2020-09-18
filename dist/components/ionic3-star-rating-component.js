@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-var HTML_TEMPLATE = "\n<div class=\"ionic3-star-rating\">\n  <button [ngStyle]=\"{'width' : fontSize, 'height' : fontSize}\" *ngFor=\"let index of iconsArray\" id=\"{{index}}\" type=\"button\" (click)=\"changeRating($event)\">\n    <i [ngStyle]=\"{'color':index < this.Math.round(this.parseFloat(rating)) ? activeColor : defaultColor, 'font-size' : fontSize }\" [class]=\"{{(halfStar ==='true' && (rating - index > 0) && (rating - index <= 0.5)) ? halfIcon : (index < this.Math.round(this.parseFloat(rating))) ? activeIcon : defaultIcon}}\"></i>\n  </button>\n</div>\n";
+var HTML_TEMPLATE = "\n<div class=\"ionic3-star-rating\">\n  <button [ngStyle]=\"{'width' : fontSize, 'height' : fontSize}\" *ngFor=\"let index of iconsArray\" id=\"{{index}}\" type=\"button\" (click)=\"changeRating($event)\">\n    <i [ngStyle]=\"{'color': getColor(), 'font-size' : fontSize }\" [class]=\"getIconName(index)\"></i>\n  </button>\n</div>\n";
 var CSS_STYLE = "\n    .ionic3-star-rating .button {\n        background: none;\n        box-shadow: none;\n        -webkit-box-shadow: none;\n    }\n";
 var StarRating = (function () {
     function StarRating(events) {
@@ -75,6 +75,12 @@ var StarRating = (function () {
         this.events.publish(this.eventInfo.topic, this.rating); //common event for all instances
         // unique event
         this.ratingChanged.emit(this.rating);
+    };
+    StarRating.prototype.getColor = function (index) {
+        return index < this.Math.round(this.parseFloat(this.rating)) ? this.activeColor : this.defaultColor;
+    };
+    StarRating.prototype.getIconName = function (index) {
+        return (this.halfStar === 'true' && (this.rating - index > 0) && (this.rating - index <= 0.5)) ? this.halfIcon : (index < this.Math.round(this.parseFloat(this.rating))) ? this.activeIcon : this.defaultIcon;
     };
     StarRating.decorators = [
         { type: Component, args: [{

@@ -5,7 +5,7 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 const HTML_TEMPLATE = `
 <div class="ionic3-star-rating">
   <button [ngStyle]="{'width' : fontSize, 'height' : fontSize}" *ngFor="let index of iconsArray" id="{{index}}" type="button" (click)="changeRating($event)">
-    <i [ngStyle]="{'color':index < this.Math.round(this.parseFloat(rating)) ? activeColor : defaultColor, 'font-size' : fontSize }" [class]="{{(halfStar ==='true' && (rating - index > 0) && (rating - index <= 0.5)) ? halfIcon : (index < this.Math.round(this.parseFloat(rating))) ? activeIcon : defaultIcon}}"></i>
+    <i [ngStyle]="{'color': getColor(), 'font-size' : fontSize }" [class]="getIconName(index)"></i>
   </button>
 </div>
 `
@@ -127,6 +127,14 @@ export class StarRating implements ControlValueAccessor, OnInit {
         this.events.publish(this.eventInfo.topic, this.rating); //common event for all instances
         // unique event
         this.ratingChanged.emit(this.rating)
+    }
+
+    getColor(index) {
+        return index < this.Math.round(this.parseFloat(this.rating)) ? this.activeColor : this.defaultColor;
+    }
+
+    getIconName(index) {
+        return (this.halfStar === 'true' && (this.rating - index > 0) && (this.rating - index <= 0.5)) ? this.halfIcon : (index < this.Math.round(this.parseFloat(this.rating))) ? this.activeIcon : this.defaultIcon
     }
 
 }
