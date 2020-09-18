@@ -5,16 +5,16 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 const HTML_TEMPLATE = `
 <div class="ionic3-star-rating">
   <button [ngStyle]="{'width' : fontSize, 'height' : fontSize}" *ngFor="let index of iconsArray" id="{{index}}" type="button" (click)="changeRating($event)">
-    <i [ngStyle]="{'color': getColor(), 'font-size' : fontSize }" [class]="getIconName(index)"></i>
+    <i [ngStyle]="{'color': getColor(index), 'font-size' : fontSize}" [class]="getIconName(index)"></i>
   </button>
 </div>
 `
 
 const CSS_STYLE = `
     .ionic3-star-rating .button {
-        background: none;
-        box-shadow: none;
-        -webkit-box-shadow: none;
+        background: none !important;
+        box-shadow: none !important;
+        -webkit-box-shadow: none !important;
     }
 `
 

@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-var HTML_TEMPLATE = "\n<div class=\"ionic3-star-rating\">\n  <button [ngStyle]=\"{'width' : fontSize, 'height' : fontSize}\" *ngFor=\"let index of iconsArray\" id=\"{{index}}\" type=\"button\" (click)=\"changeRating($event)\">\n    <i [ngStyle]=\"{'color': getColor(), 'font-size' : fontSize }\" [class]=\"getIconName(index)\"></i>\n  </button>\n</div>\n";
-var CSS_STYLE = "\n    .ionic3-star-rating .button {\n        background: none;\n        box-shadow: none;\n        -webkit-box-shadow: none;\n    }\n";
+var HTML_TEMPLATE = "\n<div class=\"ionic3-star-rating\">\n  <button [ngStyle]=\"{'width' : fontSize, 'height' : fontSize}\" *ngFor=\"let index of iconsArray\" id=\"{{index}}\" type=\"button\" (click)=\"changeRating($event)\">\n    <i [ngStyle]=\"{'color': getColor(index), 'font-size' : fontSize}\" [class]=\"getIconName(index)\"></i>\n  </button>\n</div>\n";
+var CSS_STYLE = "\n    .ionic3-star-rating .button {\n        background: none !important;\n        box-shadow: none !important;\n        -webkit-box-shadow: none !important;\n    }\n";
 var StarRating = (function () {
     function StarRating(events) {
         this.events = events;
